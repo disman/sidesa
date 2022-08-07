@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,7 +16,16 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
+//     return Inertia::render('Homepage', [
+//         'title' => 'Buttonsoft',
+//         'description' => 'Hay, selamat datang'
+//     ]);
+// });
+
+Route::get('/', [NewsController::class, 'index']);
+
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -28,4 +38,4 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
