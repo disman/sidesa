@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\NewsCollection;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,8 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        // return Inertia::render('Homepage');
-        $news = News::all();
+        $news = new NewsCollection(News::paginate(8));
         return Inertia::render('Homepage', [
             'title' => "My Title",
             'description' => "Selamat datang di laravel react tailwind",
